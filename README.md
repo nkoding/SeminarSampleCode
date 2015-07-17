@@ -11,6 +11,6 @@ Project name format
 Code base
 ---------
 
-Most ofthe examples are written in JAVA because JAVA is like my second mother tounge. 
+Most of the examples are written in JAVA because JAVA is like my second mother tounge. 
 
-However, the concepts are applicable to all object oriented languages.
+However the concepts are applicable to all object oriented languages.
