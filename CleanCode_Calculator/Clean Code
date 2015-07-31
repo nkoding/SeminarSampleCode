@@ -1,0 +1,179 @@
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+								How to code
+												
+												_______        _______ _______ __   _      _______  _____  ______  _______
+ 												|       |      |______ |_____| | \  |      |       |     | |     \ |______
+ 												|_____  |_____ |______ |     | |  \_|      |_____  |_____| |_____/ |______
+
+																										Nico Krebs
+
+blog	www.mensch-und-maschine.de
+work	www.projektmotor.de
+mail	nkoding@gmail.com
+										
+
+
+
+Alles was im folgenden beschrieben wird ist eine utopie, ein nie erreichbares ideal und keine dogmatische handungsanweisung.
+Doch ich versuche mich, so nah wie mšglich da heran zu bringen - immer pragmatisch auf den anwendungsfall bezogen.
+Jeder der folgenden vorschlŠge kann fŸr sich allein angewendet werden, man muss nicht das ÒkomplettpaketÓ einbauen sondern sollte sich herausssuchen, was praktikabel ist.
+
+
+
+1. Warum sind wir hier?
+
+wir alle haben das scon erlebt und wollen es in zukunft vermeiden:
+* projekte werden mit der zeit immer trŠger
+* neue features implementieren dauert lŠnger je mehr features es gibt
+* bugs fixt man nicht mehr in minuten sondern in wochen oder monaten (z.b. wenn architekturfehler erst spŠt sichtbar werden)
+* evtl wird ein paralleles projekt gestartet, das alles besser machen soll - mit den gleichen methoden
+* beide arbeitsgruppen konkurrieren, keine kommt wirklich voran
+* user sind unzufrieden
+* das projekt stirbt an seiner grš§e und die firma ggf. gleich mit
+* es gibt sehr viele sicherheitslŸcken im projekt
+* bekannteres bsp: flash. vermutlich ist das code mit Šhnlichen eigenschaften. Entsprechend anfŠllig ist das ganze fŸr sicherheitslŸcken 
+
+
+2. Wie kommt man aus diesem teufelskreis?
+
+2.1. Analyse: Was ist schlechter code und warum?
+
+* gro§e funktionen und klassen/scriptfiles
+* eine funktion erledigt viele aufgaben
+* abhŠngigkeiten sind hardcoded
+* verschachtelte schleifen und switch-/if/then/elseif-konstrukte werden hŠufig genutzt
+* logik befindet sich innerhalb von if-blšcken
+* klassen-/funktions-/variablennamen sind nicht aussagekrŠftig
+* funktionen mit vielen parametern
+* um den code nachzuvollziehen muss stŠndig zwischen dateien gewechselt und darin Ÿber mehrere hundert/tausend zeilen gescrollt werden
+* funktionen sind schlecht oder gar nicht testbar weil ein testcases so komplex werden wŸrden, dass sie selbst tests brŠuchten
+* im worst case GOTO-anweisungen
+* hohe wahrscheinlichkeit von SicherheitslŸcken
+=> spaghetti code
+
+2.2. Im umfeld schlechten codes findet man hŠufig auch:
+
+* keine automatischen tests weil untestbar (z.b. jUnit)
+* keine versionskontrolle (z.b. git) 
+* kein ticketsystem (z.b. redmine)
+* kein CI-system (z.b. jenkins/hudson)
+* keine Nutzung von IDEs (z.b. NetBeans)
+* keine dokumentation
+* keine leistungsfŠhigen kommunikationskanŠle (twitter/foren/chat/...) sondern hšchstens per e-mail-/telefonsupport
+
+2.3. Was ist sauberer code?
+
+* verstŠndlich im hinblick auf leistungsfŠhigkeit des gehirns (3-7 elemente im kurzzeitgedŠchtnis)
+* lesbar wie ein buch
+* eine funktion hat genau eine funktion
+* wenige kontrollkonstrukte
+* strikte trennung von logik und fehlerprŸfung
+* testbare funktionen und klassen
+* nutzung von Test Driven Development, ticketsystem, buildsystem etc. um sich selbst zu organisieren und Ÿberblick zu behalten
+
+2.4. Wie schreibt man sauberen code?
+
+2.4.1. Die leistungsfŠhigkeit des gehirns als grundlage
+
+* mšglichst drei bis sieben packages pro modul/plugin
+* mšglichst drei bis sieben klassen pro package
+* mšglichst nicht mehr als sieben funktionen pro klasse -> besser drei
+* mšglichst 3-7 zeilen logik pro funktion
+* klassen mŸssen so geplant oder refactoriert werden, dass sie mšglichst wenige hard coded abhŠngigkeiten haben
+* kommentare mšglichst vermeiden, da sie meist sowieso nicht gepflegt werden. besser sind selbsterklŠrende funktions- und variablennnamen
+* ein doc-block fŸr API-methoden muss jedoch sein (fŸr die user der API)
+
+2.4.2 lesbar wie ein buch
+
+* buch = modul
+* packagenames = kapitelŸberschriften
+* kapitel = sammlung von klassen
+* buchseite = klasse
+* aufgerufene funktionen immer im code unter der aufrufenden schreiben
+* sinnvolle funktionsnamen verwenden
+
+
+2.4.3. Eine funktion hat genau eine funktion
+
+* parameter sparen, mšglichst viel Ÿber klassenproperties abdecken
+* geschlossene systeme mit klassen schaffen
+* keine if/else-verzweigungen in der logik
+
+
+2.4.4. Kontrollkonstrukte eliminieren
+
+* durch if-konstrukte in der logik hat eine funktion meist nicht mehr nur eine funktion
+* switch/if-konstrukte aufteilen
+** interface mit canRun()/run()-methoden
+** in einer schleife alle implementierungen des interfaces durchlaufen, die erste die canRun() mit true beantwortet, deren run() methode wird aufrufen
+
+
+2.4.5. Strikte trennung von logik und fehlerprŸfung
+
+* trennung von fehlerbehandlung und logik
+** error checking standardisieren
+*** immer am anfang einer methode
+*** logik ohne stšrende kontroll-konstrukte am ende
+*** idealerweise in eine eigene funktion abkapseln
+
+
+2.5. Teile und herrsche
+
+* monolithische systeme immer weiter aufteilen
+* je kleiner die teile eines systems sind, desto beherrschbarar sind sie fŸr menschen
+* s. quicksort, designpatterns, rekursive funktionen allg.
+
+
+2.6. Emergenz
+
+* zusammenschluss vieler einfacher komponenten
+* bsp: schwŠrme, neuronale netze, wŸrfelhaufen/flummis, Conway's Game of Life, genetische/evolutionŠre algorithmen
+
+* was passiert da?
+** kontrolle an die einzelteile abgeben
+** jedes element kennt selbst den besten weg, eine situation zu handlen
+** komponenten kšnnen miteinander kommunizieren
+** durch die verbindungen entstehen neue eigenschaften des gesamtsystems (leider nur schwer vorhersagbar, welche! s. bewusstsein und freier wille)
+** einige Eigenschaften sind jedoch vorhersagbar und das kann man nutzen!
+** es gibt keinen "master", der die einzelteile kontrolliert (anm: also auch kein script, das kommands verbindet. Emergent kšnte man es bezeichnen wenn zwei oder mehr scripte autonom agieren und daten miteinander austauschen)
+** insofern kšnnen auch autonome module, klassen und funktionen emergentes verhalten produzieren -> s. multithreading 
+
+
+3. Aktuelle forschungsschwerpunkte
+
+* erhšhung der systemsicherheit
+* fehlertolerante systeme
+* fehlerbehebende systeme
+* cyber physical systems
+* standardisierung von komponenten & model driven development (nutzbare variante, nicht CASE)
+** vorbild: automobilindustrie
+*** zuverlŠssigkeit
+*** vorhersagbarkeit der kosten & entwicklungszeit
+*** standardisierte tests
+*** hochgradig wiederverwendbare komponenten
+*** standardisierte schnittstellen
+
+=> das ziel: software design => software *engineering*
+
+
+
+
+
+
+
+
+
