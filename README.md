@@ -12,7 +12,6 @@ Code base
 ---------
 
 Most of the examples are written in JAVA because JAVA is like my second mother tounge. 
-<<<<<<< HEAD
 
 However the concepts are applicable to all object oriented languages.
 
@@ -28,9 +27,8 @@ When a talk consists of 5 chapters i will create five local branches named Chapt
 Each branch will show the state of the project at a certain commit:
 #> git checkout -b Chapter-1 6e559cb
 
-During the talk i will switch between those branches to demonstrate the coding progress.
-
 =======
 
 However the concepts are applicable to all object oriented languages.
->>>>>>> a4e23107b8c6c6e24bfbe5b96ee231fa47547b38
+
+
