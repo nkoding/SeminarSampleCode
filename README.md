@@ -25,7 +25,7 @@ An Example:
 
 When a talk consists of 5 chapters i will create five local branches named Chapter-1...Chapter-5 on my presentation machine.
 Each branch will show the state of the project at a certain commit:
-#> git checkout -b Chapter-1 6e559cb
+<pre>#> git checkout -b Chapter-1 6e559cb</pre>
 
 =======
 
